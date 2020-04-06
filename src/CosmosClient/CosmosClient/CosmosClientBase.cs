@@ -13,7 +13,9 @@ namespace CosmosClient
     {
         protected IDocumentClient _client { get; }
         protected Uri CollectionUri { get; }
+
         protected int MaxTake = 1000;
+
         public CosmosClientBase(IDocumentClient client, string databaseName, string collectionName)
         {
             _client = client;

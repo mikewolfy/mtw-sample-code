@@ -23,9 +23,9 @@ namespace CosmosClient
         }
 
         public async Task<IEnumerable<TEntity>> GetAsync(
-    Expression<Func<TEntity, bool>> filter,
-    PartitionKey partitionKey = null,
-    int take = 200)
+            Expression<Func<TEntity, bool>> filter,
+            PartitionKey partitionKey = null,
+            int take = 200)
         {
             if (filter == null)
             {

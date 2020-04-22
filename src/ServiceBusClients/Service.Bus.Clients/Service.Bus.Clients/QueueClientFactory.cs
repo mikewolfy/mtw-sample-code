@@ -1,5 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Azure.ServiceBus;
+using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Concurrent;
 
 namespace Service.Bus.Clients
 {
@@ -36,7 +38,6 @@ namespace Service.Bus.Clients
             return _queueClients.AddOrReplaceIfClosed(key, () => InitializeQueueClient(_configuration[serviceBusConnectionStringName], entityPath));
         }
 
-        [ExcludeFromCodeCoverage]
         internal virtual IQueueClient InitializeQueueClient(string serviceBusConnectionString, string entityPath)
         {
             return new QueueClient(serviceBusConnectionString, entityPath);

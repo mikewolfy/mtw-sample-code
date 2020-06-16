@@ -1,0 +1,14 @@
+{
+  "name": "webpacktest",
+  "version": "1.0.0",
+  "description": "webpack samples",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.43.0"
+  }
+}

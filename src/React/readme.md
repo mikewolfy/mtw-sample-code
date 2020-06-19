@@ -342,3 +342,44 @@ const fetchData = async () => {
 
 fetchData();
 ```
+
+## Testing React
+
+Options for testing React include
+
+- Jest
+- Mocha
+- Jasmine
+- Tape
+
+### Jest
+
+- from Facebook
+- most popular way to test React.js
+- offers command line interface
+- offers snapshot testing
+
+### Helper Utils
+
+- React Test Utils: 
+  - shallow rendering only renders what you need to test
+  - no DOM required
+- **Enzype** is built on TOP of React Test Utils and is easier to use
+  - has a great API
+
+### Configuring package.json
+
+To run tests using Jest, simply add one line to the scripts section of package.json
+
+```json
+    "scripts": {
+
+        "test": "jest"
+        //OR
+        "test": "jest --watch"  //will automatically run the tests
+    },
+```
+
+- Jest only runs files with the **.test.js** or **.spec.js** files
+- Jest can be configured to exclude certain types of files
+- Snapshot testing 

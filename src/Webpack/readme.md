@@ -51,3 +51,7 @@ Use **--inline** to load the browser without the status bar, but with auto-refre
 ```sh
 webpack-dev-server --inline
 ```
+
+### Loaders
+
+Loaders are a way to get WebPack to do new things.

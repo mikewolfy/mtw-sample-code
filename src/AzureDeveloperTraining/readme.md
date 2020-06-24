@@ -17,9 +17,7 @@
 - you can get IP addresses for app services to IP filter their dependencies
 - storage accounts could have tighter access control
 
-## Topics
-
-### App Services
+## App Services
 
 - supports .NET, Java, Ruby, Node.JS, PHP, Python
 - execute in a managed sandbox environment
@@ -47,7 +45,7 @@
 - can run in **App Service on Linux**
   - containers can easily be sourced from Docker Hub or Azure Container Registry
 
-#### Azure CLI commands
+### Azure CLI commands
 
 ```sh
 az appservice plan create --name $name --resource-group $rgname --sku FREE
@@ -62,7 +60,7 @@ az webapp up --location ... name <appname> --html
 az group delete --name ManagedPlatform --no-wait --yes
 ```
 
-#### Powershell commands
+### Powershell commands
 
 ```powershell
 New-AzWebApp
@@ -72,31 +70,31 @@ New-AzAppServicePlan
 New-AzResourceGroup
 ```
 
-#### App Settings
+### App Settings
 
 - overrides web.config or appsettings.json
 - sets app settings, connection strings, default documents, path mappings, custom containers
 - hidden by default in the Azure Portal
 
-##### Default Documents
+#### Default Documents
 
 - only available for Windows Apps
 
-##### Path Mappings
+#### Path Mappings
 
 - used to map container storage
 
-#### Commands
+### Commands
 
 ```sh
 az webapp config set ...
 ```
 
-#### CORS
+### CORS
 
 Mechanism for servers to indicate which requests they support
 
-#### IP Addresses
+### IP Addresses
 
 - single inbound IP addresses
 - a set of outbound IP addresses
@@ -106,7 +104,7 @@ Mechanism for servers to indicate which requests they support
 az webapp show --query outboundIPAddresses --output tsv
 ```
 
-#### Scaling
+### Scaling
 
 Criteria include:
 
@@ -130,7 +128,7 @@ Highlights
   - always use scale-out and scale-in together
   - choose the correct metric and thresholds carefully
 
-#### Deployment Slots
+### Deployment Slots
 
 - can swap slots, they swap only after warmed up
 - can push a percentage of traffic
@@ -139,9 +137,9 @@ Highlights
 az webapp deployment slot swap ---....
 ```
 
-### Azure Functions
+## Azure Functions
 
-#### Overview
+### Overview
 
 - Can be triggered in different ways:
   - HTTP request
@@ -164,7 +162,7 @@ az webapp deployment slot swap ---....
   - credentials are NOT stored in code
 - Azure Virtual Networks can be integrated with Functions, but require a **Premium Plan**
 
-#### Best Practices
+### Best Practices
 
 - avoid long running transactions
 - use queues for cross-function communication
@@ -173,18 +171,18 @@ az webapp deployment slot swap ---....
 - state data should be associated with inputs and outputs
 - code defensively
 
-#### Developing
+### Developing
 
 - can edit in the portal
 
-#### Durable Functions
+### Durable Functions
 
 - can write **stateful** functions
 - manages state, checkpoints, and restarts
 - allows for **chaining** of functions together; a durable orchestrator can call other functions in sequence
 - allows for **fan-out** model in which one function can call others in parallel
 
-### Azure Blob Storage
+## Azure Blob Storage
 
 - object storage for the cloud
 - designed for
@@ -233,11 +231,11 @@ az webapp deployment slot swap ---....
   - tables
   - queues
 
-  #### [Code Snippet](./azure.storage.md)
+  ### [Code Snippet](./azure.storage.md)
 
-### IaaS Solutions (Virtual Machines and Containers)
+## IaaS Solutions (Virtual Machines and Containers)
 
-#### Provision VMs
+### Provision VMs
 
 Virtual Machines can use 2 types of disks
 
@@ -249,7 +247,7 @@ You can choose either:
 - unmanaged disks - manually create and manage virtual hard disks
 - managed disks - Microsoft takes care of overhead
 
-##### Create a VM
+#### Create a VM
 
 - can pick from temlates
   - based on processing, memory, disk, networking
@@ -283,7 +281,7 @@ You can choose either:
   - Use AAD to login
   - setup auto-shutdown
 
-##### Highlights
+#### Highlights
 
 - **PerfInsights** will send out metrics on the VM
 - single VM SLA 99.9%, Multi VM: 99.99%
@@ -302,7 +300,7 @@ Get-AzPublicIpAddress -ResourceGroupName <name>
 
 ![Image Gallery](./images/shared.vm.image.gallery.png)
 
-#### ARM Templates
+### ARM Templates
 
 - multiple resources can utlize **nested templates**
 -
@@ -311,6 +309,303 @@ Get-AzPublicIpAddress -ResourceGroupName <name>
 az group deployment create --name <name> --resource-group <rg-name> --template-file <json file>
 ```
 
-#### Container Images
+### Container Images
 
-#### Container Registries
+- Containers run on top of VMs so are much more efficient because they don't contain the entire VM image
+
+#### Terms
+
+- Container - everything needed for an application to run
+- Container Image - a template used to create one or more containers
+- Build
+- Pull
+- Push
+- Dockerfile - text file containing build instructions
+
+```sh
+docker pull ubuntu
+
+docker pull mysql:5.7
+
+docker pull mysql:latest
+
+docker pull
+
+docker run mcr.microsoft.com/xxx/ss/d/sds
+
+docker container ls -a
+```
+
+```sh
+FROM node:8.9.3-apline
+RUN mkdri -p /usr/scr/app
+COPY ...
+WORKDIR  ...
+RUN npm install
+CMD node /usr/src/app/index.js
+```
+
+> **_[Azure Samples on GitHub](https://github.com/Azure-Samples?q=aci&type=&language=)_**
+
+![containers](./images/containers.v.vms.png)
+
+![docker](./images/docker.png)
+
+### Container Registries
+
+#### Azure Container Registry (ACR)
+
+Integrates closely with
+
+- Azure app service
+- Azure service fabric
+
+Terms
+
+- Registry
+- Repository - group of related images
+- Image
+- Container
+
+Container Registry SKU's
+
+- Basic:
+- Standard:
+- Premium: more storage and more concurrent operations, geo-replication
+
+```sh
+az acr create --resource-group <group> --name --sku
+
+docker pull microsoft/aci-helloworld
+
+az acr list --query ....to get the login server name
+
+#gets the login server name
+az acr show -- name <acrname> --query loginServer --output table
+
+#you need to tag the image with the login server name
+docker tag <image-name> <loginservername>/<imagename>:v1
+
+docker push ...
+```
+
+```sh
+#to run a container based on an ACR image
+az container create --name --image --resource-group --registry-login-server ....
+```
+
+> [AZ container create documentation](https://docs.microsoft.com/en-us/azure/container-instances/container-instances-using-azure-container-registry)
+
+```sh
+#pushes a
+az acr build --registry $acrName --image ipcheck:latest .
+```
+
+## Key Vaults and Secret Management
+
+- Can enable purge protection
+- Soft delete with a retention period
+- Premium tier allows for HSM key backup
+- Access Policies
+  - Enable Access for:
+    - Virtual Machines for deployment
+- Networking
+  - VNet
+
+### When setting secrets
+
+- can set value, name, activation date, expiration data, enabled (Y/N)
+- can then get a **Secret Identifier** which is the URL to the secret
+
+### When setting Keys
+
+- name
+- can set RSA or EC
+- key size
+- activation date
+- expiration data
+
+### When setting certificates
+
+- can generate or import
+- certificate name
+- type of certificate authority
+- renewal frequency
+
+## Managed Identities
+
+- User Assigned - can be assigned to multiple resources; is created in the portal using the **User Assigned Managed Identity** resource type
+- System Assigned - can be used within a single resource
+
+![managed identities](./images/managed.identities.png)
+
+## API Management Overview
+
+Benefits of API Management
+
+- Authentication
+- Versioning
+- Creates a developer portal
+- Managines caching, throttling, and other policies
+- Monitoring and analytics
+
+### Terms
+
+- Backend API
+- Frontend API
+- Product - one or more API's packaged together, can be Open or Protected
+- Operation - operation called by consumer
+- Version - a breaking change to the front-end API
+- Revision - a non-breaking change, can't have side-by-side revisions
+- Developer Portal
+
+### Policies
+
+Collection of statements that are executed sequentially at the request or response of an API
+
+- a quick way to adjust behavior without code
+- logging
+- mocking responses
+- retry logic
+- limit concurrency
+- filter IP addresses
+- rewrite URL
+- adjust query parameters
+
+### Subscriptions
+
+Tie Developers to Products. Can generate keys for subscriptions.
+
+- Subscriptions can have different **Scopes**
+
+### Developer Portal
+
+Allows developers to sign up and get access to APIs, that expose the operations.
+
+## Logic Apps
+
+- An Automation workflow solution
+- no code
+- prebuilt templates
+- out of the box connections to SaaS solutions
+- BizTalk API's available
+- JSON based workflow definition
+- can be deployed using ARM templates
+- can connect to on-premises, hybrid and cloud applications
+- can execute complex integration scenarios
+
+### Terms
+- Workflow
+- Triggers - can be Polling or Push
+- Actions
+- Connectors (Lots of them)
+
+![Logic App Components](./images/logic.app.components.png)
+
+### Enterprise Integration
+
+1. Create an integration account
+2. Connect everything to the account
+
+### Tools
+
+1. Portal
+2. Visual Studio
+3. VS Code
+
+> Can be built using the Visual Designer or through code
+
+### Connectors
+
+- Lots of pre-built connectors
+- Can be built custom
+
+### Templates
+
+- workflow templates can be imported and then used to build your own workflows
+
+## Event Based Solutions
+
+### Event Grid
+
+- allows you to easily build event-based architectures
+- lots of Azure resources can send Event Grid events
+  - Subscription Mgmt Operations
+  - Custom Topics
+  - IoT
+  - Service Bus
+  - etc.
+- Subscribers include
+  - functions
+  - logic apps
+  - webhooks
+  - queue storage
+  - event hubs
+
+#### Standard Schema
+
+- topic
+- subject
+- id
+- eventTime
+- eventType
+- data
+- dataVersion
+
+#### Security in Event Grid
+
+- Webhook - requires that you prove ownership (Except for Azure Functions, Logic Apps, or Azure Automation)
+- Event Subscriptions
+  - Uses RBAC permissions to ensure that you ahve acces to the resources needed
+- Custom Topic
+  - key based or 
+
+#### Filtering
+
+- setup on subscriptions
+- by subject:  begins with, ends with, etc.
+- by type
+
+#### Setup
+
+1. Register the Event Grid provider
+2. create type
+3. create subscription with endpoint
+
+### Event Hubs
+
+- high throughput, streaming events
+- events are divided by a **partition key** to identify the source
+- **consumer groups** 
+- data can be automatically captured and stored in Azure Blob storage or Azure data lake
+- Capture time or zize intervals can be specified
+- You can specify a window for capturing
+- Data is stored using a standard naming convention
+  - {}/{}/{}/{}/{}/{}/{}
+- **Kafka** does the same thing; you can integrate with **Kafka MirrorMaker**
+- Security
+  - Only clients can preset valid credentials
+  - publishers can send, but not receive messages
+  - a client cannot impersonate another client
+  - a rouge client can be blocked from sending data 
+  - SAS keys can be created with permissions and can be created via code
+- Tiers
+  - Basic - 1 consumer group and throughput
+  - Standard - 20 consumer groups
+
+
+### IoT Hub
+
+- can PUSH AND PULL messages from devices
+
+
+## Messaging Solutions with Service Bus
+
+![Comparison](./images/messaging.comparison.png)
+
+- can configure
+  - time to live
+  - lock duration
+  - duplicate detection
+  - size
+- explorer (in preview)

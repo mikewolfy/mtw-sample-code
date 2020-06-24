@@ -27,6 +27,7 @@
 - secure and compiant
 - **App Service Plans** can group applications together within a subscription
   - dictate billing
+  - **SHARED** app service plan **IS NOT** available for Linux apps
 - built in authentication and authorization support
 - user claims are made available to code
 - built in toke store
@@ -609,3 +610,50 @@ Allows developers to sign up and get access to APIs, that expose the operations.
   - duplicate detection
   - size
 - explorer (in preview)
+
+## Storage Queues
+
+![Storage](./images/storage.queues.png)
+
+## CosmosDB
+
+- global replication
+- 5 consistency models
+- 10 ms reads and 15 ms writes at 99% SLA
+
+### Consistency Levels
+- Strong 
+- Bounded Stateless
+- Session
+- Consistent Prefix
+- Eventual
+
+![Consmos Consistency](./images/cosmos.consistency.png)
+
+### APIs
+- MongoDB
+- Table
+- Gremlin API
+- Cassandra
+- SQL API
+
+### Stored Procedures
+- can be written in different languages, including JavaScript
+- Bounded Context
+  - operations must complete in a limited amount of time.
+  - can be rolled back or forward
+- **continuation** can be used to resume an operation that didn't complete or finish
+- **Optimistic Concurrency** - there's an If-Match header that can be used to determine if a document should be updated
+
+### User Defined Functions
+
+
+### Triggers
+
+## Azure SQL Database
+- relational
+- shares code and features with SQL Server
+- 2 purchasing models
+  - vCore-basesd compute purchasing
+  - DTU based throughput purchasing
+- **Azure SQL Server** allows you to manage your own server and have multiple databases on one server.  **Azure SQL Database** is simpler if you only need one database.

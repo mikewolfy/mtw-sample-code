@@ -388,3 +388,76 @@ To run tests using Jest, simply add one line to the scripts section of package.j
 Prettier is a package that will auto-format your javascript.
 
 > NOTE: in Visual Studio Code, turn on Auto-Format by going to File | Preferences | Settings and searching for 'formatOnSave'
+
+## Webpack
+
+Used to minify and pack up javascript files.
+
+- in Development, it only puts files into memory, it doesn't copy them anywhere
+- 
+
+```javascript
+const webpack = require("webpack");
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+process.env.NODE_ENV = "development";
+
+module.exports = {
+  mode: "development",
+  target: "web",
+  devtool: "cheap-module-source-map",
+  entry: "./src/index",
+  output: {
+    path: path.resolve(__dirname, "build"),
+    publicPath: "/",
+    filename: "bundle.js"
+  },
+  devServer: {
+    stats: "minimal",
+    overlay: true,
+    historyApiFallback: true,   //all requests will route through index.html
+    disableHostCheck: true,     
+    headers: { "Access-Control-Allow-Origin": "*" },
+    https: false
+  },
+  plugins: [
+    // plugins tell webpack how to find certain files
+    new HtmlWebpackPlugin({                       
+      template: "src/index.html",
+      favicon: "src/favicon.ico"
+    })
+  ],
+  module: {
+      // define rules for which files to compile
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: ["babel-loader", "eslint-loader"]
+      },
+      {
+        test: /(\.css)$/,
+        use: ["style-loader", "css-loader"]
+      }
+    ]
+  }
+};
+
+```
+
+## Babel
+
+Will transpile modern JavaScript down to versions that are compatible with browsers.  It also converts JSX to JavaScript.
+
+Configured via:
+- a babel config
+- OR package.json
+
+```json
+  "babel": {
+    "presets": [
+      "babel-preset-react-app"
+    ]
+  }
+```

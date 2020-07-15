@@ -461,3 +461,18 @@ Configured via:
     ]
   }
 ```
+
+## NPM scripts to execute
+
+You can configure NPM to run your code by adding a `scripts` section to package.json
+
+```json
+  "scripts": {
+    "start": "webpack-dev-server --config webpack.config.dev.js --port 3000"
+  }
+```
+
+## ESLint can check your code for well written code
+
+
+

@@ -1,11 +1,27 @@
 # Azure Developer Training
 
+This documentation covers content for the AZ-204, Azure Developer Certification.
+
+I also have notes based on the [Skills Measured](./skills-measured.md)
+
 ## Resources
 
 - [Learining Path](http://aka.ms/az204/learningpath)
 - [Walkthrough](http://aka.ms/az204/guidedwalkthroughs)
 - [Study Guide](http://aka.ms/az204/studyguide)
 - [Microsoft Training Site](https://tsfb.learnondemand.net/) D601DDF2
+- [Paid Practice Tests](https://www.measureup.com/)
+
+## Test Details
+- 40 some questions
+- arrange code, but won't have to write code
+- newer test will have lab with simulation
+
+## Command to Switch Subscription (I needed this in labs)
+
+```sh
+az account set --subscription <name or id>
+```
 
 ## Deeper Dive
 
@@ -657,3 +673,130 @@ Allows developers to sign up and get access to APIs, that expose the operations.
   - vCore-basesd compute purchasing
   - DTU based throughput purchasing
 - **Azure SQL Server** allows you to manage your own server and have multiple databases on one server.  **Azure SQL Database** is simpler if you only need one database.
+
+
+## Microsoft Graph
+
+Identity is replacing Azure Active Directory
+
+### Applications & Service Principals
+Applications can be registered with Azure AD
+- the application is the global representation of the app
+- the Service Principal is the local representation within a specific Tenant.  So a single application needs multiple Service Principals in a multi-tenant app.
+
+### MSAL
+Libraries for querying the Graph: Microsoft Authentication Library (MSAL)
+
+![MSAL Authentication Flows](./images/msal.authentication.flows.png)
+
+MSAL defines 2 types of clients"
+1. Public Clients - run on devices or PC's or in browsers that are not trusted. Use the `PublicClientApplciation` class.
+2. Confidential Clients - apps that run on servers (web app) that can keep the client ID secure.  Use the `ConfidentialClientApplication` class.
+
+#### Important Concepts
+
+- Client ID
+- provider URL & sign-in audience
+- Tenant ID
+- application secret or certificate
+- use the `Builder` classes in MSAL to instantiate an application
+
+```csharp
+var clientApp = PublicClientApplicationBuilder.Create(client_id)
+    .Build();
+
+string redirectUri = "https://myapp.azurewebsites.net";
+IConfidentialClientApplication app = ConfidentialClientApplicationBuilder.Create(clientId)
+    .WithClientSecret(clientSecret)
+    .WithRedirectUri(redirectUri )
+    .Build();
+
+var clientApp = PublicClientApplicationBuilder.Create(client_id)
+    .WithAuthority(AzureCloudInstance.AzurePublic, tenant_id)
+    .WithRedirectUri("http://localhost")
+    .Build();
+```
+
+#### Shared Access Signature (SAS) Tokens
+
+SAS is a signed URI that contains a token the indicates how resources may be used.
+
+- SAS token may be signed with either a **User Delegation Key** or a **Storage Account Key**.
+
+## Azure Monitor
+
+- Applications, OS's, Resources, Subscriptions, Tenants log to Monitor
+- Can build alerts, dashboards, or export data
+- Can Analyze using Log Analytics to query logs or build dashboards
+- Alerts are tied to a resource and include an **Action Group** and **Monitor Condition**
+- Alerts have 3 states:
+  - New
+  - Acknowledged
+  - Closed
+- Application Insights
+  - service
+  - can use JavaScript to monitor front end calls
+    - users
+    - page load times
+    - errors
+
+## Redis
+
+- open-source NoSQL storage mechanism
+- key-value pairs
+- data types
+- can have hundreds of thousands of key-value pairs
+- recommendation is to use cache groups
+- operations
+  - GET 
+  - SET 
+  - GETSET - sets a new value and returns the previous value
+  - EXISTS
+- 3 Tiers
+  - Basic - single node
+  - Standard - 2 nodes
+  - Premium - allows for more scale out capabilities
+- ONLY use for public information
+
+## CDN
+Content Delivery Network.  Distributed network of servers to deliver content to users.  Used to deliver static content that doesn't change often.
+
+Uses
+- static content: images, files, static sites
+- streaming videos
+- IoT - CDN can distribute firmware updates to huge number of devices
+- ability to handle surges without scaling the underlying application
+
+Providers
+- custom Verizon
+- Premium Verizon
+- Standard Akamai
+- Standard China CDN
+- Standard Verizon
+
+Steps
+- Create a CDN Profile
+- Create a CDN endpoint
+- Configure caching rules
+  - Global Caching Rules - affect all requests, override any HTTP cache-directive headers
+  - Custom Caching Rules - override global caching rules
+
+Configuration
+- Can configure Compression for certain file types
+- Geo-filtering
+- Optimization: for certain types of scenarios: web site, streaming, etc.
+
+```sh
+az 
+
+az cdn endpoint create --name
+
+#attach a custom domain
+az cdn customer-domain create --
+
+#purge the cache
+az cdn endpoint purge --content-paths
+
+#pre-laod cdn
+az cdn endpoint create
+```

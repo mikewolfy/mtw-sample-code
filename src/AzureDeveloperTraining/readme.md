@@ -2,7 +2,7 @@
 
 This documentation covers content for the AZ-204, Azure Developer Certification.
 
-I also have notes based on the [Skills Measured](./skills-measured.md)
+I also have notes based on the [Skills Measured](./skills-measured.md).
 
 ## Resources
 

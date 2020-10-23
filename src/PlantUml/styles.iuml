@@ -1,0 +1,29 @@
+skinparam handwritten false
+skinparam backgroundColor White
+skinparam defaultTextAlignment center
+
+skinparam BorderColor Black
+skinparam BackgroundColor White
+skinparam TitleFontColor #055197
+
+skinparam actor {
+  BorderColor #055197
+  BackgroundColor #FFD900
+}
+
+skinparam usecase {
+  BackgroundColor #FFD900
+  BorderColor #055197
+  ArrowColor #055197
+}
+
+skinparam database {
+  BackgroundColor #FFD900
+  BorderColor #055197
+}
+
+skinparam note {
+  BackgroundColor #055197
+  BorderColor #FFD900
+  FontColor White
+}

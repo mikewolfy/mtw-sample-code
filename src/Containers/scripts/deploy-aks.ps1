@@ -6,12 +6,17 @@ $ResourceGroupName = Read-Host -Prompt 'Enter Resource Group Name:'
 $RegistryName = Read-Host -Prompt 'Enter Container Registry Name:'
 $AksName = Read-Host -Prompt 'Enter AKS Instance Name:'
 
-az group create --name $ResourceGroupName --location eastus
+az group create `
+  --name $ResourceGroupName `
+  --location eastus
 
 Write-Host "Resource group created!"
 Write-Host "Creating container registry!"
 
-$response = az acr create --resource-group $ResourceGroupName --name $RegistryName --sku Basic
+$response = az acr create `
+  --resource-group $ResourceGroupName `
+  --name $RegistryName `
+  --sku Basic
 
 Write-Host $response
 Write-Host "Login Server: $response.loginServer"
@@ -22,7 +27,16 @@ az acr login --name $RegistryName
 
 Write-Host "Logged in, creating AKS"
 
-az aks create -g $ResourceGroupName -n $AksName --location eastus  --attach-acr $RegistryName --generate-ssh-keys
+az aks create `
+  -g $ResourceGroupName `
+  -n $AksName `
+  --node-count 2 `
+  --enable-addons http_application_routing `
+  --dns-name-prefix contoso-kubernetes-$RANDOM `
+  --location eastus `
+  --attach-acr $RegistryName `
+  --generate-ssh-keys `
+  --node-vm-size Standard_B2s
 
 Write-Host "AKS created, logging into AKS"
 
@@ -38,6 +52,8 @@ $loginServer = az acr list --resource-group myResourceGroup --query "[].{acrLogi
 Write-Host "Login Server Name: $loginServer"
 
 Read-Host -Prompt 'Got it?'
+
+kubectl get nodes
 
 # $FunctionAppPlanName = -join ($functionAppName, "-plan")
 

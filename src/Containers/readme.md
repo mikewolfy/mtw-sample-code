@@ -143,3 +143,29 @@ docker run -d -p 5432:5432 -v postgres-data:/var/lib/postgressql/data --name pos
 ### Multi-stage Docker Build that Builds then Publishes
 
 ![pluralsight image](./images/multi-stage-build-deploy.png)
+
+
+## Kubernetes
+
+### Run on Each Node
+
+- kubelet
+- kube-proxy
+- container runtime
+
+### Pods
+
+- Pods are wrappers around containers that run on Kubernetes.
+- Pods can hold one or more containers.
+
+#### Pod Lifecycle Phases
+
+- Pending
+- Running
+- Succeeded
+- Failed
+- Unknown
+
+### Kubernetes Service
+
+A Kubernetes Service provides communication between nodes, pods, and users.

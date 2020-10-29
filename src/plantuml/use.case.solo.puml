@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+actor Customer as c
+package carmax.com {
+    usecase "Semi-Anonymous Browsing" as uc2
+    usecase "Light Registration" as uc3
+    usecase "Full Registration" as uc4
+}
+package "CIAM Services" {
+    usecase "create light account\nunique phone or email" as la
+    usecase "create account\nverified unique phone or email" as lr
+    usecase "full registration\nverified unique phone or email + password" as fr
+}
+c --> uc2
+c --> uc3
+c --> uc4
+uc2 --> la
+uc3 --> lr
+uc4 --> fr
+
+@enduml

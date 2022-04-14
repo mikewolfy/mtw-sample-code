@@ -1,0 +1,37 @@
+<html>
+
+<head>
+<script type = "text/javascript">
+    function print_todays_date( ) { 
+       var d = new Date( ); // Get today's date and time 
+       document.write(d.toLocaleString( )); // Insert it into the document 
+    } 
+
+    function squares_map( ) { 
+        const numbers = [1,5,9,12];
+        const squares = numbers.map(Math.sqrt);
+        document.write(squares);
+
+        if(squares.includes(4))
+        {
+            document.write('yes');
+        }
+        else {
+            document.write('no');
+        }
+    } 
+</script>
+</head>
+
+<body>
+    <h1>Test Page</h1>
+    <script>
+        print_todays_date();
+    </script>
+    <br/>
+    <script>
+        squares_map();
+    </script>
+</body>
+
+</html>

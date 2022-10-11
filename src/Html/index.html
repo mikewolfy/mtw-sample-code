@@ -20,6 +20,28 @@
             document.write('no');
         }
     } 
+
+    function cookies_map() { 
+        const cookies = [
+        {
+            "name": "cookie1",
+            "id": 123
+        },
+        {
+            "name": "cookie2",
+            "id": 3344
+        }];
+        const cookieNames = cookies.map(x=>x.name);
+        document.write(cookieNames);
+
+        if(cookieNames.includes("cookie2"))
+        {
+            document.write('yes');
+        }
+        else {
+            document.write('no');
+        }
+    } 
 </script>
 </head>
 
@@ -30,7 +52,7 @@
     </script>
     <br/>
     <script>
-        squares_map();
+        cookies_map();
     </script>
 </body>
 

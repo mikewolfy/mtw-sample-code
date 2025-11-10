@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "netreactsample.client", "netreactsample.client\netreactsample.client.esproj", "{5709D051-0FF0-12B1-7094-08CF7D2B9D15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetReactSample.Server", "NetReactSample.Server\NetReactSample.Server.csproj", "{C64B15C7-5D0B-44B8-9910-9F46B66D31DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5709D051-0FF0-12B1-7094-08CF7D2B9D15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5709D051-0FF0-12B1-7094-08CF7D2B9D15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5709D051-0FF0-12B1-7094-08CF7D2B9D15}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{5709D051-0FF0-12B1-7094-08CF7D2B9D15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5709D051-0FF0-12B1-7094-08CF7D2B9D15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5709D051-0FF0-12B1-7094-08CF7D2B9D15}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{C64B15C7-5D0B-44B8-9910-9F46B66D31DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C64B15C7-5D0B-44B8-9910-9F46B66D31DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C64B15C7-5D0B-44B8-9910-9F46B66D31DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C64B15C7-5D0B-44B8-9910-9F46B66D31DC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D8C3E5D4-846B-4A7A-86B7-8ECCF5F196EA}
+	EndGlobalSection
+EndGlobal

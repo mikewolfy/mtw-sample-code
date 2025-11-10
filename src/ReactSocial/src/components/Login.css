@@ -1,0 +1,57 @@
+.login-container {
+  width: 100%;
+  max-width: 450px;
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  padding: 40px;
+  text-align: center;
+}
+
+.login-header {
+  margin-bottom: 40px;
+}
+
+.login-header h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.login-header p {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.login-body {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.login-footer {
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.login-footer p {
+  font-size: 0.85rem;
+  color: #999;
+  line-height: 1.4;
+}

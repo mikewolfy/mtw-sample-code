@@ -1,0 +1,501 @@
+.landing-container {
+  width: 100%;
+  max-width: 900px;
+  animation: fadeIn 0.5s ease-in;
+}
+
+.landing-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  padding: 50px;
+}
+
+.landing-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.landing-header h1 {
+  font-size: 2.8rem;
+  color: #333;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.landing-header p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.demo-section {
+  margin-bottom: 50px;
+}
+
+.demo-section h2 {
+  text-align: center;
+  color: #333;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.demo-description {
+  text-align: center;
+  color: #666;
+  margin-bottom: 40px;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.demo-option {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 35px;
+  border-radius: 12px;
+  text-align: center;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.demo-option:hover {
+  border-color: #4285f4;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(66, 133, 244, 0.2);
+}
+
+.option-icon {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+}
+
+.demo-option h3 {
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.demo-option p {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  min-height: 80px;
+}
+
+.demo-btn {
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.popup-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.popup-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.inline-btn {
+  background: linear-gradient(135deg, #4285f4 0%, #1a73e8 100%);
+  color: white;
+}
+
+.inline-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(66, 133, 244, 0.4);
+}
+
+.features-section {
+  margin-top: 50px;
+  padding-top: 40px;
+  border-top: 2px solid #e9ecef;
+}
+
+.features-section h3 {
+  text-align: center;
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.feature-icon {
+  font-size: 1.5rem;
+}
+
+/* Security Section */
+.security-section {
+  margin-top: 50px;
+  padding-top: 40px;
+  border-top: 2px solid #e9ecef;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.section-header h3 {
+  color: #333;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.toggle-btn {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggle-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.security-intro {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.security-details {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Authentication Method Cards */
+.auth-method {
+  background: #f8f9fa;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  overflow: hidden;
+  border: 2px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.auth-method:hover {
+  border-color: #4285f4;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.method-header {
+  padding: 20px 25px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-weight: 600;
+}
+
+.method-header.redirect {
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+}
+
+.method-header.modal {
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+}
+
+.method-header.social {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+}
+
+.method-header.otp {
+  background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+}
+
+.method-icon {
+  font-size: 1.8rem;
+}
+
+.method-header h4 {
+  flex: 1;
+  margin: 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.security-badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.security-badge.high {
+  background: #4caf50;
+  color: white;
+}
+
+.security-badge.medium {
+  background: #ff9800;
+  color: white;
+}
+
+.security-badge.low {
+  background: #f44336;
+  color: white;
+}
+
+.method-content {
+  padding: 25px;
+  background: white;
+}
+
+.pros, .cons, .use-case {
+  margin-bottom: 20px;
+}
+
+.pros strong, .cons strong, .use-case strong {
+  color: #333;
+  font-size: 1rem;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.pros ul, .cons ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.pros li, .cons li {
+  margin-bottom: 8px;
+  color: #555;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.use-case {
+  background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #3f51b5;
+}
+
+.use-case strong {
+  color: #3f51b5;
+}
+
+/* Best Practices Section */
+.best-practices {
+  margin-top: 40px;
+  padding: 30px;
+  background: linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%);
+  border-radius: 12px;
+  border: 2px solid #4db6ac;
+}
+
+.best-practices h4 {
+  color: #00695c;
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.practices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.practice-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.practice-card h5 {
+  color: #00695c;
+  font-size: 1rem;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.practice-card ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.practice-card li {
+  margin-bottom: 8px;
+  color: #555;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Recommendations Section */
+.recommendations {
+  margin-top: 30px;
+  padding: 30px;
+  background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+  border-radius: 12px;
+  border: 2px solid #fbc02d;
+}
+
+.recommendations h4 {
+  color: #f57f17;
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.recommendation-grid {
+  display: grid;
+  gap: 15px;
+}
+
+.recommendation-item {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  border-left: 5px solid;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recommendation-item.high-security {
+  border-left-color: #4caf50;
+}
+
+.recommendation-item.standard {
+  border-left-color: #2196f3;
+}
+
+.recommendation-item.demo {
+  border-left-color: #ff9800;
+}
+
+.recommendation-item strong {
+  display: block;
+  color: #333;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.recommendation-item p {
+  margin: 0;
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Key Takeaway */
+.key-takeaway {
+  margin-top: 30px;
+  padding: 25px;
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+  border-radius: 12px;
+  border: 3px solid #e53935;
+}
+
+.key-takeaway h4 {
+  color: #c62828;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.key-takeaway p {
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0;
+  text-align: center;
+}
+
+.key-takeaway strong {
+  color: #c62828;
+}
+
+@media (max-width: 768px) {
+  .landing-card {
+    padding: 30px 20px;
+  }
+
+  .landing-header h1 {
+    font-size: 2rem;
+  }
+
+  .button-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .demo-option p {
+    min-height: auto;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .practices-grid,
+  .recommendation-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .method-header {
+    flex-wrap: wrap;
+  }
+
+  .method-header h4 {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}

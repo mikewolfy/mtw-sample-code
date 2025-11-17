@@ -4,15 +4,24 @@ import './Dashboard.css';
 
 function Dashboard({ user, onLogout }) {
   const [profile, setProfile] = useState(null);
+  const [loginType, setLoginType] = useState('google');
 
   useEffect(() => {
-    if (user && user.credential) {
-      try {
-        const decoded = jwtDecode(user.credential);
-        setProfile(decoded);
-        console.log('User Profile:', decoded);
-      } catch (error) {
-        console.error('Error decoding token:', error);
+    if (user) {
+      setLoginType(user.type || 'google');
+      
+      if (user.type === 'username' || user.type === 'otp') {
+        // Handle username/password or OTP login
+        setProfile(user.data);
+      } else if (user.type === 'google' && user.data.credential) {
+        // Handle Google login
+        try {
+          const decoded = jwtDecode(user.data.credential);
+          setProfile(decoded);
+          console.log('User Profile:', decoded);
+        } catch (error) {
+          console.error('Error decoding token:', error);
+        }
       }
     }
   }, [user]);
@@ -30,9 +39,16 @@ function Dashboard({ user, onLogout }) {
       <div className="dashboard-card">
         <div className="dashboard-header">
           <h1>✅ Successfully Authenticated!</h1>
-          <button className="logout-btn" onClick={onLogout}>
-            Logout
-          </button>
+          <div className="header-info">
+            <span className="login-method-badge">
+              {loginType === 'google' && '🌐 Google Login'}
+              {loginType === 'username' && '🔐 Username/Password'}
+              {loginType === 'otp' && '📧 Email OTP'}
+            </span>
+            <button className="logout-btn" onClick={onLogout}>
+              Logout
+            </button>
+          </div>
         </div>
         
         <div className="profile-section">
@@ -52,44 +68,85 @@ function Dashboard({ user, onLogout }) {
         <div className="details-section">
           <h3>Profile Details</h3>
           <div className="detail-grid">
-            <div className="detail-item">
-              <span className="detail-label">User ID:</span>
-              <span className="detail-value">{profile.sub}</span>
-            </div>
-            <div className="detail-item">
-              <span className="detail-label">Given Name:</span>
-              <span className="detail-value">{profile.given_name || 'N/A'}</span>
-            </div>
-            <div className="detail-item">
-              <span className="detail-label">Family Name:</span>
-              <span className="detail-value">{profile.family_name || 'N/A'}</span>
-            </div>
-            <div className="detail-item">
-              <span className="detail-label">Locale:</span>
-              <span className="detail-value">{profile.locale || 'N/A'}</span>
-            </div>
-            <div className="detail-item">
-              <span className="detail-label">Token Issued At:</span>
-              <span className="detail-value">
-                {new Date(profile.iat * 1000).toLocaleString()}
-              </span>
-            </div>
-            <div className="detail-item">
-              <span className="detail-label">Token Expires At:</span>
-              <span className="detail-value">
-                {new Date(profile.exp * 1000).toLocaleString()}
-              </span>
-            </div>
+            {loginType === 'google' && (
+              <>
+                <div className="detail-item">
+                  <span className="detail-label">User ID:</span>
+                  <span className="detail-value">{profile.sub}</span>
+                </div>
+                <div className="detail-item">
+                  <span className="detail-label">Given Name:</span>
+                  <span className="detail-value">{profile.given_name || 'N/A'}</span>
+                </div>
+                <div className="detail-item">
+                  <span className="detail-label">Family Name:</span>
+                  <span className="detail-value">{profile.family_name || 'N/A'}</span>
+                </div>
+                <div className="detail-item">
+                  <span className="detail-label">Locale:</span>
+                  <span className="detail-value">{profile.locale || 'N/A'}</span>
+                </div>
+                <div className="detail-item">
+                  <span className="detail-label">Token Issued At:</span>
+                  <span className="detail-value">
+                    {new Date(profile.iat * 1000).toLocaleString()}
+                  </span>
+                </div>
+                <div className="detail-item">
+                  <span className="detail-label">Token Expires At:</span>
+                  <span className="detail-value">
+                    {new Date(profile.exp * 1000).toLocaleString()}
+                  </span>
+                </div>
+              </>
+            )}
+            {loginType === 'username' && (
+              <>
+                <div className="detail-item">
+                  <span className="detail-label">Username:</span>
+                  <span className="detail-value">{profile.username}</span>
+                </div>
+                <div className="detail-item">
+                  <span className="detail-label">Email:</span>
+                  <span className="detail-value">{profile.email}</span>
+                </div>
+                <div className="detail-item">
+                  <span className="detail-label">Login Method:</span>
+                  <span className="detail-value">Username/Password</span>
+                </div>
+              </>
+            )}
+            {loginType === 'otp' && (
+              <>
+                <div className="detail-item">
+                  <span className="detail-label">Username:</span>
+                  <span className="detail-value">{profile.username}</span>
+                </div>
+                <div className="detail-item">
+                  <span className="detail-label">Email:</span>
+                  <span className="detail-value">{profile.email}</span>
+                </div>
+                <div className="detail-item">
+                  <span className="detail-label">Login Method:</span>
+                  <span className="detail-value">Email OTP Verification</span>
+                </div>
+                <div className="detail-item">
+                  <span className="detail-label">Verification:</span>
+                  <span className="detail-value">✓ Email Verified</span>
+                </div>
+              </>
+            )}
           </div>
         </div>
 
-        <div className="token-section">
-          <h3>JWT Token (truncated)</h3>
-          <div className="token-display">
-            {/* <code>{user.credential.substring(0, 100)}...</code> */}
-            <code>{user.credential}</code>
+        {loginType === 'google' && user.data.credential && (
+          <div className="token-section">
+            <h3>JWT Token</h3>
+            <div className="token-display">
+              <code>{user.data.credential}</code>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

@@ -1,0 +1,77 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: fadeIn 0.3s ease-in;
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  position: relative;
+  max-width: 500px;
+  width: 100%;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: #666;
+  transition: all 0.2s ease;
+  z-index: 1001;
+}
+
+.modal-close:hover {
+  background: #f44336;
+  color: white;
+  transform: rotate(90deg);
+}
+
+.modal-close:active {
+  transform: rotate(90deg) scale(0.95);
+}
+
+@media (max-width: 768px) {
+  .modal-backdrop {
+    padding: 10px;
+  }
+  
+  .modal-close {
+    top: -10px;
+    right: -10px;
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+  }
+}

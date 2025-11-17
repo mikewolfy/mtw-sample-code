@@ -86,7 +86,8 @@ function Dashboard({ user, onLogout }) {
         <div className="token-section">
           <h3>JWT Token (truncated)</h3>
           <div className="token-display">
-            <code>{user.credential.substring(0, 100)}...</code>
+            {/* <code>{user.credential.substring(0, 100)}...</code> */}
+            <code>{user.credential}</code>
           </div>
         </div>
       </div>

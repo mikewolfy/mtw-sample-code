@@ -3,9 +3,9 @@
 
 export const msalConfig = {
   auth: {
-    clientId: 'YOUR_CLIENT_ID', // Application (client) ID from Azure Portal
-    authority: 'https://YOUR_TENANT_NAME.b2clogin.com/YOUR_TENANT_NAME.onmicrosoft.com/B2C_1_SignUpSignIn', // Your B2C authority
-    knownAuthorities: ['YOUR_TENANT_NAME.b2clogin.com'], // Your B2C domain
+    clientId: 'ffdbf82f-41ce-4507-8ed4-35ce61680f86', // Application (client) ID from Azure Portal
+    authority: 'https://login.emptywolf.com/mtwb2c.onmicrosoft.com/B2C_1A_SignUp_SignIn', // Your B2C authority
+    knownAuthorities: ['login.emptywolf.com'], // Your B2C domain
     redirectUri: window.location.origin, // Redirect URI (e.g., http://localhost:3000)
     postLogoutRedirectUri: window.location.origin, // Post logout redirect URI
   },
@@ -34,14 +34,14 @@ export const b2cPolicies = {
   },
   authorities: {
     signUpSignIn: {
-      authority: 'https://YOUR_TENANT_NAME.b2clogin.com/YOUR_TENANT_NAME.onmicrosoft.com/B2C_1_SignUpSignIn',
+      authority: 'https://login.emptywolf.com/mtwb2c.onmicrosoft.com/B2C_1A_SignUp_SignIn',
     },
     forgotPassword: {
-      authority: 'https://YOUR_TENANT_NAME.b2clogin.com/YOUR_TENANT_NAME.onmicrosoft.com/B2C_1_PasswordReset',
+      authority: 'https://login.emptywolf.com/mtwb2c.onmicrosoft.com/B2C_1A_PasswordReset',
     },
     editProfile: {
-      authority: 'https://YOUR_TENANT_NAME.b2clogin.com/YOUR_TENANT_NAME.onmicrosoft.com/B2C_1_ProfileEdit',
+      authority: 'https://login.emptywolf.com/mtwb2c.onmicrosoft.com/B2C_1A_ProfileEdit',
     },
   },
-  authorityDomain: 'YOUR_TENANT_NAME.b2clogin.com',
+  authorityDomain: 'login.emptywolf.com',
 };

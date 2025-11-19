@@ -2,7 +2,7 @@
 
 A modern React.js application demonstrating multiple authentication patterns including Google OAuth and traditional username/password login. This app showcases both popup and inline login experiences with a beautiful, responsive UI.
 
-## 🌟 Features
+## 🌟 Features 
 
 - **Multiple Authentication Methods**
   - Google OAuth 2.0 Integration

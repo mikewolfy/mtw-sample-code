@@ -1,0 +1,65 @@
+.popup-iframe-status {
+  padding: 40px;
+  text-align: center;
+}
+
+.status-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.status-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  animation: fadeIn 0.5s ease-in;
+}
+
+.status-message.success .status-icon {
+  color: #28a745;
+}
+
+.status-message.error .status-icon {
+  color: #dc3545;
+}
+
+.status-message p {
+  font-size: 18px;
+  color: #333;
+  margin: 8px 0;
+  font-weight: 600;
+}
+
+.status-note {
+  font-size: 14px !important;
+  color: #666 !important;
+  font-weight: 400 !important;
+  margin-top: 4px !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

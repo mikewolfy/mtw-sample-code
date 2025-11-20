@@ -1,15 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MsalProvider, AuthenticatedTemplate, UnauthenticatedTemplate } from '@azure/msal-react';
 import { PublicClientApplication } from '@azure/msal-browser';
-import { msalConfig } from './authConfig';
-import { SignInButton } from './components/SignInButton';
+import { msalConfig, loginRequest } from './authConfig';
+import { AuthMethodSelector } from './components/AuthMethodSelector';
 import { ProfileContent } from './components/ProfileContent';
+import { IFrameLogin } from './components/IFrameLogin';
+import { PopupIFrameLogin } from './components/PopupIFrameLogin';
 import './App.css';
 
 // Initialize MSAL instance
 const msalInstance = new PublicClientApplication(msalConfig);
 
 function App() {
+  const [selectedMethod, setSelectedMethod] = useState(null);
+  const [showIFrameLogin, setShowIFrameLogin] = useState(false);
+  const [showPopupIFrame, setShowPopupIFrame] = useState(false);
+
+  const handleMethodSelect = (method) => {
+    setSelectedMethod(method);
+    
+    if (method === 'popup') {
+      // Use standard MSAL popup
+      msalInstance.loginPopup(loginRequest).catch((e) => {
+        console.error('Login error:', e);
+      });
+    } else if (method === 'iframe-embedded') {
+      // Show embedded iframe
+      setShowIFrameLogin(true);
+    } else if (method === 'popup-iframe') {
+      // Show popup with iframe
+      setShowPopupIFrame(true);
+    }
+  };
+
+  const handleCloseIFrame = () => {
+    setShowIFrameLogin(false);
+    setSelectedMethod(null);
+  };
+
+  const handleBackToSelector = () => {
+    setSelectedMethod(null);
+    setShowPopupIFrame(false);
+  };
+
   return (
     <MsalProvider instance={msalInstance}>
       <div className="App">
@@ -18,25 +51,22 @@ function App() {
         </AuthenticatedTemplate>
         
         <UnauthenticatedTemplate>
-          <div className="login-container">
-            <div className="login-card">
-              <div className="logo-container">
-                <div className="logo">🔐</div>
-              </div>
-              <h1>Azure B2C Authentication</h1>
-              <p className="subtitle">
-                Sign in to access your account using Azure Active Directory B2C
-              </p>
-              <SignInButton />
-              <div className="info-section">
-                <h3>What is Azure AD B2C?</h3>
-                <p>
-                  Azure Active Directory B2C is a customer identity access management (CIAM) 
-                  solution that enables you to sign up and sign in users to your applications.
-                </p>
-              </div>
+          {!selectedMethod && !showPopupIFrame && (
+            <AuthMethodSelector onMethodSelect={handleMethodSelect} />
+          )}
+
+          {showIFrameLogin && (
+            <IFrameLogin onClose={handleCloseIFrame} />
+          )}
+
+          {showPopupIFrame && (
+            <div className="popup-iframe-container">
+              <button className="back-button" onClick={handleBackToSelector}>
+                ← Back to Method Selection
+              </button>
+              <PopupIFrameLogin />
             </div>
-          </div>
+          )}
         </UnauthenticatedTemplate>
       </div>
     </MsalProvider>
